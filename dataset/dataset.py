@@ -24,7 +24,7 @@ class DatasetLoad(Dataset):
         self.files = [f for f in self.files if f in stego_files]
 
     def __len__(self):
-        return len(self.files) * 2   # Include both cover and stego images
+        return len(self.files)
 
     def __getitem__(self, index):
         filename = self.files[index]
