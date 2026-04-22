@@ -2,6 +2,9 @@
 
 import os
 import torch
+import random
+from torchvision import transforms
+import torchvision.transforms.functional as TF
 from torch.utils.data import Dataset
 import imageio as io
 
@@ -40,3 +43,16 @@ class DatasetLoad(Dataset):
             "stego": stego_img,
             "label": [label_cover, label_stego],
         }
+
+class RandomRotate90:
+    def __call__(self, x):
+        k = random.randint(0, 3)
+        return TF.rotate(x, 90 * k)
+
+train_transform = transforms.Compose([
+    transforms.ToPILImage(),
+    transforms.Resize((256, 256)),
+    transforms.RandomHorizontalFlip(p=0.5),  # random mirroring
+    RandomRotate90(),
+    transforms.ToTensor(),
+])

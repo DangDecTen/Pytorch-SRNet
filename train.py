@@ -32,31 +32,23 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
 if __name__ == "__main__":
-
+    
     train_data = dataset.DatasetLoad(
         opt.cover_path,
         opt.stego_path,
-        opt.train_size,
-        transform=transforms.Compose(
-            [
-                transforms.ToPILImage(),
-                transforms.RandomRotation(degrees=90),
-                transforms.ToTensor(),
-            ]
-        ),
+        transform=dataset.train_transform
     )
 
     val_data = dataset.DatasetLoad(
         opt.valid_cover_path,
         opt.valid_stego_path,
-        opt.val_size,
-        transform=transforms.ToTensor(),
+        transform=transforms.ToTensor()
     )
 
-    # Creating training and validation loader.
     train_loader = DataLoader(
         train_data, batch_size=opt.batch_size, shuffle=True
     )
+
     valid_loader = DataLoader(
         val_data, batch_size=opt.batch_size, shuffle=False
     )
