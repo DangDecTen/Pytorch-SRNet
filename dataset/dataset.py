@@ -1,12 +1,14 @@
 """This module provide the data sample for training."""
 
 import os
-import torch
 import random
+import numpy as np
+import imageio as io
+
+import torch
 from torchvision import transforms
 import torchvision.transforms.functional as TF
 from torch.utils.data import Dataset
-import imageio as io
 
 class DatasetLoad(Dataset):
     def __init__(self, cover_path, stego_path, transform=None):
@@ -31,9 +33,15 @@ class DatasetLoad(Dataset):
         stego_img = io.imread(os.path.join(self.stego_path, filename))
 
         if self.transform:
-            cover_img = self.transform(cover_img)
-            stego_img = self.transform(stego_img)
+            # The SAME random transform is applied to both images in a pair
+            seed = np.random.randint(0, 10000)
 
+            random.seed(seed)
+            cover_img = self.transform(cover_img)
+
+            random.seed(seed)
+            stego_img = self.transform(stego_img)
+            
         # Labels (stay on CPU)
         label_cover = torch.tensor(0, dtype=torch.long)
         label_stego = torch.tensor(1, dtype=torch.long)
