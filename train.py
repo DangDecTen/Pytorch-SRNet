@@ -42,7 +42,7 @@ if __name__ == "__main__":
     val_data = dataset.DatasetLoad(
         opt.valid_cover_path,
         opt.valid_stego_path,
-        transform=transforms.ToTensor()
+        transform=dataset.val_transform
     )
 
     train_loader = DataLoader(
