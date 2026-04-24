@@ -19,7 +19,7 @@ def latest_checkpoint() -> int:
     if os.path.exists(opt.checkpoints_dir):
         all_chkpts = "".join(os.listdir(opt.checkpoints_dir))
         if len(all_chkpts) > 0:
-            latest = max(map(int, re.findall("\d+", all_chkpts)))
+            latest = max(map(int, re.findall(r"\d+", all_chkpts)))
         else:
             latest = None
     else:
