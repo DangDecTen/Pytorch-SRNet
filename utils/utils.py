@@ -11,7 +11,7 @@ opt = arguments()
 
 
 def saver(state: Dict[str, float], save_dir: str, epoch: int) -> None:
-    torch.save(state, save_dir + "net_" + str(epoch) + ".pt")
+    torch.save(state, os.path.join(save_dir, "net_" + str(epoch) + ".pt"))
 
 
 def latest_checkpoint() -> int:
