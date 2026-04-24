@@ -120,7 +120,7 @@ if __name__ == "__main__":
                 f" Batch:{i+1}/{len(train_loader)}"
                 f" Loss:{training_loss[-1]:.4f}"
                 f" Acc:{training_accuracy[-1]:.2f}"
-                f" LR:{optimizer.param_groups[0]['lr']:.4f}"
+                f" LR:{optimizer.param_groups[0]['lr']:.6f}"
             )
 
         end_time = time.time()

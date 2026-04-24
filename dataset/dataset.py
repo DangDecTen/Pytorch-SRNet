@@ -59,16 +59,16 @@ class RandomRotate90:
 
 train_transform = transforms.Compose([
     transforms.ToPILImage(),
-    # transforms.Resize((256, 256)),
-    # transforms.RandomHorizontalFlip(p=0.5),  # random mirroring
-    # RandomRotate90(),
-    transforms.CenterCrop(256),
+    transforms.Resize((256, 256)),
+    transforms.RandomHorizontalFlip(p=0.5),  # random mirroring
+    RandomRotate90(),
+    # transforms.CenterCrop(256),
     transforms.ToTensor(),
 ])
 
 val_transform = transforms.Compose([
     transforms.ToPILImage(),
-    # transforms.Resize((256, 256)),
-    transforms.CenterCrop(256),
+    transforms.Resize((256, 256)),
+    # transforms.CenterCrop(256),
     transforms.ToTensor(),
 ])
